@@ -1,10 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import type { NextPage } from 'next';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
+import Modal from '@/elements/Modal';
 
 type CharacterInfo = {
   count: number;
@@ -40,6 +41,16 @@ type CharacterData = {
 };
 
 const Home: NextPage<CharacterData> = ({ info, results }) => {
+  const [moduleIsShown, setModuleIsShown] = useState(false);
+
+  const showModuleHandler = () => {
+    setModuleIsShown(true);
+  };
+
+  const hideModuleHandler = () => {
+    setModuleIsShown(false);
+  };
+
   return (
     <Fragment>
       <Metadata
@@ -58,7 +69,11 @@ const Home: NextPage<CharacterData> = ({ info, results }) => {
         </form>
         <div className="character-list">
           {results.map(character => (
-            <article className="character" key={character.id}>
+            <article
+              className="character"
+              key={character.id}
+              onClick={showModuleHandler}
+            >
               <div className="character__img">
                 <Image
                   src={character.image}
@@ -75,6 +90,7 @@ const Home: NextPage<CharacterData> = ({ info, results }) => {
             </article>
           ))}
         </div>
+        {moduleIsShown && <Modal onClose={hideModuleHandler}>Test</Modal>}
       </Container>
     </Fragment>
   );

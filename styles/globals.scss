@@ -24,3 +24,140 @@ a {
     background: black;
   }
 }
+
+//////////////////////////////////////////
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  background-color: rgb(242, 242, 242);
+  margin-bottom: 40px;
+
+  & > .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.logo {
+  width: 180px;
+  height: 70px;
+  position: relative;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__link {
+    &:link,
+    &:visited {
+      display: flex;
+      align-items: center;
+      height: 70px;
+      text-decoration: none;
+      font-size: 20px;
+      color: rgb(83, 83, 83);
+      transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
+
+    &:hover,
+    &:active {
+      color: rgb(0, 0, 0);
+    }
+
+    &--active {
+      &:link,
+      &:visited {
+        color: #0b5ed7;
+        font-weight: 700;
+        border-bottom: 3px solid #0b5ed7;
+      }
+    }
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 500;
+}
+
+h3 {
+  margin: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 45px;
+  margin-bottom: 40px;
+
+  &__input {
+    flex: 1;
+    height: 100%;
+    font-size: 16px;
+    border: 2px solid #0b5ed7;
+    border-radius: 8px;
+    box-shadow: 1px 3px 9px rgb(0 0 0 / 25%);
+    padding: 10px 15px;
+  }
+
+  &__btn {
+    height: 100%;
+    padding: 0 20px;
+    font-size: 18px;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    background-color: #0d6efd;
+    box-shadow: 1px 3px 9px rgb(0 0 0 / 25%);
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+      background-color: #0b5ed7;
+    }
+  }
+}
+
+.character-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 20px;
+}
+
+.character {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #0b5ed7;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+
+  &__img {
+    overflow: hidden;
+    transition: transform 1.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  &__text {
+    padding: 20px;
+  }
+
+  &:hover {
+    box-shadow: 1px 3px 9px rgb(0 0 0 / 25%);
+  }
+
+  &:hover > &__img {
+    transform: scale3d(1.05, 1.05, 1.05) translateZ(0);
+  }
+}

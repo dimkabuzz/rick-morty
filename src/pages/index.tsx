@@ -4,21 +4,10 @@ import { GetServerSideProps } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
-import Modal from '@/elements/Modal';
 import CharacterThumb from '@/elements/CharacterThumb';
 import { Character } from '@/types/Character';
 
 const Home: NextPage<Character> = ({ info, results }) => {
-  const [moduleIsShown, setModuleIsShown] = useState(false);
-
-  const showModuleHandler = () => {
-    setModuleIsShown(true);
-  };
-
-  const hideModuleHandler = () => {
-    setModuleIsShown(false);
-  };
-
   return (
     <Fragment>
       <Metadata
@@ -33,18 +22,13 @@ const Home: NextPage<Character> = ({ info, results }) => {
             type="text"
             placeholder="Search for characters"
           />
-          <button className="search__btn">Search</button>
+          <button className="btn">Search</button>
         </form>
         <div className="character-list">
           {results.map(data => (
-            <CharacterThumb
-              key={data.id}
-              character={data}
-              showModal={showModuleHandler}
-            />
+            <CharacterThumb key={data.id} character={data} />
           ))}
         </div>
-        {moduleIsShown && <Modal onClose={hideModuleHandler}>Test</Modal>}
       </Container>
     </Fragment>
   );

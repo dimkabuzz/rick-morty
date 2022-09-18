@@ -8,11 +8,7 @@ const Backdrop = ({ onClose }: { onClose: () => void }) => {
 };
 
 const ModalOverlay = ({ children }: { children?: ReactNode }) => {
-  return (
-    <div className={classes.modal}>
-      <div className={classes.content}>{children}</div>
-    </div>
-  );
+  return <div className={classes.modal}>{children}</div>;
 };
 
 type ModalProps = {

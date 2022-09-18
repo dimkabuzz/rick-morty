@@ -14,17 +14,17 @@
   left: 5%;
   width: 90%;
   background-color: white;
-  padding: 1rem;
+  padding: 16px;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 450px) {
   .modal {
-    width: 20rem;
-    left: calc(50% - 10rem);
+    width: 320px;
+    left: calc(50% - 160px);
   }
 }
 

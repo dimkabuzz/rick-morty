@@ -4,9 +4,10 @@ import { GetServerSideProps } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
-import CharacterThumb from '@/elements/CharacterThumb';
+import CharacterList from '@/elements/CharacterList';
 import Search from '@/elements/Search';
 import { Character } from '@/types/Character';
+import fetchCharacters from '@/utils/fetchCharacters';
 
 const Home: NextPage<Character> = ({ info, results }) => {
   const [nameQuery, setNameQuery] = useState('');
@@ -14,16 +15,12 @@ const Home: NextPage<Character> = ({ info, results }) => {
 
   useEffect(() => {
     (async function () {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/?name=${nameQuery}`
-      );
-      const data: Character = await response.json();
-      setFetchedData(data);
+      setFetchedData(await fetchCharacters(nameQuery));
     })();
   }, [nameQuery]);
 
-  const dataToRender = fetchedData?.results || results;
-  const isNotFound = !fetchedData?.results && nameQuery;
+  const data = fetchedData?.results || results;
+  const noData = !fetchedData?.results && nameQuery.length > 0;
 
   return (
     <Fragment>
@@ -34,23 +31,7 @@ const Home: NextPage<Character> = ({ info, results }) => {
       <Container>
         <h1>Characters</h1>
         <Search query={setNameQuery} />
-        <div
-          className="character-list"
-          style={{
-            maxWidth:
-              dataToRender.length < 4
-                ? dataToRender.length * 200 +
-                  (dataToRender.length - 1) * 20 +
-                  'px'
-                : '100%',
-          }}
-        >
-          {!isNotFound &&
-            dataToRender.map(data => (
-              <CharacterThumb key={data.id} character={data} />
-            ))}
-          {isNotFound && <p>No Characters Found</p>}
-        </div>
+        <CharacterList dataToRender={data} error={noData} />
       </Container>
     </Fragment>
   );
@@ -62,8 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
-  const response = await fetch('https://rickandmortyapi.com/api/character/');
-  const data: Character = await response.json();
+  const data = await fetchCharacters();
 
   return {
     props: {

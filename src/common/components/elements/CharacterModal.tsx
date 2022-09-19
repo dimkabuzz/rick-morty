@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { CharacterResults } from '@/types/Character';
-import IconFav from '@/elements/IconFav';
+import ButtonFav from '@/elements/ButtonFav';
 
 type Props = {
   character: CharacterResults;
@@ -35,9 +35,7 @@ export default function CharacterModal({ character, closeModal }: Props) {
         <p>
           <span>Species:</span> {character.species}
         </p>
-        <button className="character-modal__fav-btn">
-          <IconFav />
-        </button>
+        <ButtonFav character={character} />
       </div>
       <Link href={`/character/${character.id}`}>
         <button className="btn btn--more">Show More Details</button>

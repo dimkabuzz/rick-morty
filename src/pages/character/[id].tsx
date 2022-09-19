@@ -1,14 +1,13 @@
-import { Fragment } from 'react';
-import type { NextPage } from 'next';
-import type { GetStaticProps, GetStaticPaths } from 'next';
+import React, { Fragment } from 'react';
+import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
-import IconFav from '../../common/components/elements/IconFav';
-import { CharacterResults } from '@/types/Character';
-import { EpisodeResults } from '@/types/Episode';
+import ButtonFav from '@/elements/ButtonFav';
+import type { CharacterResults } from '@/types/Character';
+import type { EpisodeResults } from '@/types/Episode';
 import fetchCharacters from '@/utils/fetchCharacters';
 import fetchCharacter from '@/utils/fetchCharacter';
 import fetchEpisodes from '@/utils/fetchEpisodes';
@@ -66,9 +65,7 @@ const CharacterDetails: NextPage<Props> = ({ character, episodes }: Props) => {
               <p>
                 <span>Species:</span> {character.species}
               </p>
-              <button className="character-modal__fav-btn">
-                <IconFav />
-              </button>
+              <ButtonFav character={character} />
             </div>
           </div>
         </article>

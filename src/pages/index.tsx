@@ -1,12 +1,15 @@
 import { Fragment, useState, useEffect } from 'react';
-import type { NextPage } from 'next';
-import type { GetStaticProps } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
 import CharacterList from '@/elements/CharacterList';
 import Search from '@/elements/Search';
-import type { Character } from '@/types/Character';
+import type {
+  Character,
+  CharacterInfo,
+  CharacterResults,
+} from '@/types/Character';
 import fetchCharacters from '@/utils/fetchCharacters';
 
 const Home: NextPage<Character> = ({ info, results }) => {
@@ -37,13 +40,18 @@ const Home: NextPage<Character> = ({ info, results }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async context => {
-  const data = await fetchCharacters();
+type DataProps = {
+  info: CharacterInfo;
+  results: CharacterResults[];
+};
+
+export const getStaticProps: GetStaticProps<DataProps> = async () => {
+  const { info, results } = await fetchCharacters();
 
   return {
     props: {
-      info: data.info,
-      results: data.results,
+      info: info,
+      results: results,
     },
   };
 };

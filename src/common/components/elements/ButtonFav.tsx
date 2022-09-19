@@ -11,9 +11,11 @@ const ButtonFav = ({ character }: Props) => {
   const [favorites, setFavorites] = useState<CharacterResults[]>([]);
 
   useEffect(() => {
-    const storedFavs = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const storedFavs: CharacterResults[] = JSON.parse(
+      localStorage.getItem('favorites') || '[]'
+    );
     const matchedFav = storedFavs.find(
-      (storedChar: CharacterResults) => storedChar.id === character.id
+      storedChar => storedChar.id === character.id
     );
 
     matchedFav && setIsFav(true);

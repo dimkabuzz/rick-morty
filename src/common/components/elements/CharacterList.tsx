@@ -1,5 +1,6 @@
 import CharacterThumb from '@/elements/CharacterThumb';
-import { CharacterResults } from '@/types/Character';
+import type { CharacterResults } from '@/types/Character';
+import calcMaxWidth from '@/utils/calcMaxWidth';
 
 type Props = {
   dataToRender: CharacterResults[];
@@ -11,10 +12,7 @@ const CharacterList = ({ dataToRender, error }: Props) => {
     <div
       className="character-list"
       style={{
-        maxWidth:
-          dataToRender.length < 4
-            ? dataToRender.length * 200 + (dataToRender.length - 1) * 20 + 'px'
-            : '100%',
+        maxWidth: calcMaxWidth(dataToRender),
       }}
     >
       {!error &&

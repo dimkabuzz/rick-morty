@@ -6,7 +6,7 @@ import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
 import CharacterList from '@/elements/CharacterList';
 import Search from '@/elements/Search';
-import { Character } from '@/types/Character';
+import type { Character } from '@/types/Character';
 import fetchCharacters from '@/utils/fetchCharacters';
 
 const Home: NextPage<Character> = ({ info, results }) => {
@@ -25,7 +25,7 @@ const Home: NextPage<Character> = ({ info, results }) => {
   return (
     <Fragment>
       <Metadata
-        title="Ricky and Morty"
+        title="Rick and Morty"
         description="Visualization of Ricky and Morty characters using NextJS"
       />
       <Container>

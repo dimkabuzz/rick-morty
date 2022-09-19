@@ -1,9 +1,8 @@
-import { Character } from '../types/Character';
+import type { Character } from '@/types/Character';
+import { API } from '@/utils/constants';
 
 const fetchCharacters = async (nameQuery?: string) => {
-  const api = `https://rickandmortyapi.com/api/character/${
-    nameQuery ? `?name=${nameQuery}` : ''
-  }`;
+  const api = `${API}${nameQuery ? `?name=${nameQuery}` : ''}`;
 
   const response = await fetch(api);
   const data: Character = await response.json();

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Modal from '@/elements/Modal';
 import CharacterModal from '@/elements/CharacterModal';
-import { CharacterResults } from '@/types/Character';
+import type { CharacterResults } from '@/types/Character';
 
 type Props = {
   character: CharacterResults;

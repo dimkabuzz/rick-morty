@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import type { NextPage } from 'next';
+import type { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -84,7 +85,11 @@ const CharacterDetails: NextPage<Props> = ({ character, episodes }: Props) => {
   );
 };
 
-export async function getStaticPaths() {
+type PathProps = {
+  id: string;
+};
+
+export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
   const data = await fetchCharacters();
   const idArr = Array.from({ length: data.info.count }, (_, i) => i + 1);
 
@@ -96,10 +101,15 @@ export async function getStaticPaths() {
       },
     })),
   };
-}
+};
 
-export async function getStaticProps({ params }) {
-  const { id } = params;
+type DataProps = {
+  character: CharacterResults;
+  episodes: EpisodeResults[];
+};
+
+export const getStaticProps: GetStaticProps<DataProps> = async ({ params }) => {
+  const { id } = params!;
 
   const characterData = await fetchCharacter(id);
   const episodesData = await fetchEpisodes(characterData.episode);
@@ -110,6 +120,6 @@ export async function getStaticProps({ params }) {
       episodes: episodesData,
     },
   };
-}
+};
 
 export default CharacterDetails;

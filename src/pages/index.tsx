@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from 'react';
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
+import type { GetStaticProps } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
@@ -37,12 +37,7 @@ const Home: NextPage<Character> = ({ info, results }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
-
+export const getStaticProps: GetStaticProps = async context => {
   const data = await fetchCharacters();
 
   return {

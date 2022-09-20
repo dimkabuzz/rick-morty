@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
-
 type Props = {
-  query: Dispatch<SetStateAction<string>>;
+  query: (q: string) => void;
 };
 
 const Search = ({ query }: Props) => {

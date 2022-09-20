@@ -4,6 +4,7 @@ import type { NextPage, GetStaticProps } from 'next';
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
 import CharacterList from '@/elements/CharacterList';
+import Pagination from '@/elements/Pagination';
 import Search from '@/elements/Search';
 import type {
   Character,
@@ -29,10 +30,6 @@ const Home: NextPage<Character> = ({ info, results }) => {
     })();
   }, [nameQuery, currentPage]);
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentPage(+e.target.value);
-  };
-
   const handleSearchQuery = (query: string) => {
     setNameQuery(query);
     setCurrentPage(1);
@@ -48,50 +45,12 @@ const Home: NextPage<Character> = ({ info, results }) => {
         <h1>Characters</h1>
         <Search query={handleSearchQuery} />
         <CharacterList dataToRender={data} error={noData} />
-        {pageInfo.pages > 1 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '3px',
-              margin: '30px 0',
-            }}
-          >
-            {pageInfo.prev && (
-              <button onClick={() => setCurrentPage(currentPage - 1)}>
-                {`<<`}
-              </button>
-            )}
-            {pageInfo.pages > 1 && (
-              <Fragment>
-                <span>Page </span>
-                <select
-                  name="pages"
-                  id="pages"
-                  value={currentPage}
-                  onChange={handleSelectChange}
-                >
-                  {Array.from({ length: pageInfo.pages }, (_, i) => i + 1).map(
-                    page => (
-                      <option
-                        key={page}
-                        value={page}
-                        onClick={() => setCurrentPage(page)}
-                      >
-                        {page}
-                      </option>
-                    )
-                  )}
-                </select>
-                <span> of {pageInfo.pages}</span>
-              </Fragment>
-            )}
-            {pageInfo.next && (
-              <button onClick={() => setCurrentPage(currentPage + 1)}>
-                {`>>`}
-              </button>
-            )}
-          </div>
+        {pageInfo.pages > 1 && !noData && (
+          <Pagination
+            info={pageInfo}
+            current={currentPage}
+            setCurrent={setCurrentPage}
+          />
         )}
       </Container>
     </Fragment>

@@ -57,12 +57,7 @@ const Home: NextPage<Character> = ({ info, results }) => {
   );
 };
 
-type DataProps = {
-  info: CharacterInfo;
-  results: CharacterResults[];
-};
-
-export const getStaticProps: GetStaticProps<DataProps> = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { info, results } = await fetchCharacters();
 
   return {

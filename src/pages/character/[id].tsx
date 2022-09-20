@@ -83,11 +83,7 @@ const CharacterDetails: NextPage<Props> = ({ character, episodes }: Props) => {
   );
 };
 
-type PathProps = {
-  id: string;
-};
-
-export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = await fetchCharacters();
   const idArr = Array.from({ length: data.info.count - 1 }, (_, i) => i + 1);
 

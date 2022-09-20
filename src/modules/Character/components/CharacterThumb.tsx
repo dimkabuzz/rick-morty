@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 
 import Modal from '@/elements/Modal';
-import CharacterModal from '@/elements/CharacterModal';
+import CharacterModal from '@/modules/Character/components/CharacterModal';
 import type { CharacterResults } from '@/types/Character';
 
 type Props = {

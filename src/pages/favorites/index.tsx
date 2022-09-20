@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
-import CharacterList from '@/elements/CharacterList';
+import CharacterList from '@/modules/Character/components/CharacterList';
 import type { CharacterResults } from '@/types/Character';
 
 const Favorites: NextPage = () => {

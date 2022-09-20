@@ -1,4 +1,4 @@
-import CharacterThumb from '@/elements/CharacterThumb';
+import CharacterThumb from '@/modules/Character/components/CharacterThumb';
 import type { CharacterResults } from '@/types/Character';
 import calcMaxWidth from '@/utils/calcMaxWidth';
 

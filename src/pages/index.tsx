@@ -3,7 +3,7 @@ import type { NextPage, GetStaticProps } from 'next';
 
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
-import CharacterList from '@/elements/CharacterList';
+import CharacterList from '@/modules/Character/components/CharacterList';
 import Pagination from '@/elements/Pagination';
 import Search from '@/elements/Search';
 import type {

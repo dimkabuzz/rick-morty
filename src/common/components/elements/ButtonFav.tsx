@@ -1,43 +1,17 @@
-import { useState, useEffect } from 'react';
-
 import type { CharacterResults } from '@/types/Character';
+import { useFav } from '@/context/FavContext';
 
 type Props = {
   character: CharacterResults;
 };
 
 const ButtonFav = ({ character }: Props) => {
-  const [isFav, setIsFav] = useState(false);
-  const [favorites, setFavorites] = useState<CharacterResults[]>([]);
+  const { favorites, updateFavorites } = useFav();
 
-  useEffect(() => {
-    const storedFavs: CharacterResults[] = JSON.parse(
-      localStorage.getItem('favorites') || '[]'
-    );
-    const matchedFav = storedFavs.find(
-      storedChar => storedChar.id === character.id
-    );
-
-    matchedFav && setIsFav(true);
-    setFavorites(storedFavs);
-  }, [character]);
-
-  const updateLocalFavs = (newFav: CharacterResults[]) => {
-    localStorage.setItem('favorites', JSON.stringify(newFav));
-    setFavorites(newFav);
-    setIsFav(!isFav);
-  };
+  const isFav = favorites.find(storedChar => storedChar.id === character.id);
 
   const toggleHandler = () => {
-    if (!isFav) {
-      const newFavorites = favorites.concat(character);
-      updateLocalFavs(newFavorites);
-    } else {
-      const newFavorites = favorites.filter(
-        (storedChar: CharacterResults) => storedChar.id !== character.id
-      );
-      updateLocalFavs(newFavorites);
-    }
+    updateFavorites(character);
   };
 
   return (

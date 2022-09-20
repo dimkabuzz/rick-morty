@@ -4,18 +4,11 @@ import type { NextPage } from 'next';
 import Metadata from '@/layouts/Metadata';
 import Container from '@/layouts/Container';
 import CharacterList from '@/modules/Character/components/CharacterList';
-import type { CharacterResults } from '@/types/Character';
+import { useFav } from '@/context/FavContext';
 
 const Favorites: NextPage = () => {
-  const [favorites, setFavorites] = useState<CharacterResults[]>([]);
+  const { favorites } = useFav();
   const noData = favorites.length === 0;
-
-  useEffect(() => {
-    const storedFavs: CharacterResults[] = JSON.parse(
-      localStorage.getItem('favorites') || '[]'
-    );
-    setFavorites(storedFavs);
-  }, []);
 
   return (
     <Fragment>

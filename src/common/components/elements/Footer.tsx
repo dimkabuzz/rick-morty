@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <Container>
         <p>
-          Developed with <span>❤</span> by Dumitru Trifan. © 2022
+          Developed with <span>❤</span> by Dumitru Trifan.
         </p>
       </Container>
     </footer>

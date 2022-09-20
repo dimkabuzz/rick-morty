@@ -10,7 +10,8 @@
       "@/utils/*": ["src/common/utils/*"],
       "@/modules/*": ["src/modules/*"],
       "@/pages/*": ["src/pages/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/context/*": ["src/context/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

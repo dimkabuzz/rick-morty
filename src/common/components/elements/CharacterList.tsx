@@ -19,7 +19,7 @@ const CharacterList = ({ dataToRender, error }: Props) => {
         dataToRender.map(data => (
           <CharacterThumb key={data.id} character={data} />
         ))}
-      {error && <p>No Characters Found</p>}
+      {error && <p style={{ textAlign: 'center' }}>No Characters Found</p>}
     </div>
   );
 };

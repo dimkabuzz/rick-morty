@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -88,7 +89,7 @@ type PathProps = {
 
 export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
   const data = await fetchCharacters();
-  const idArr = Array.from({ length: data.info.count }, (_, i) => i + 1);
+  const idArr = Array.from({ length: data.info.count - 1 }, (_, i) => i + 1);
 
   return {
     fallback: 'blocking',
@@ -100,13 +101,12 @@ export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
   };
 };
 
-type DataProps = {
-  character: CharacterResults;
-  episodes: EpisodeResults[];
-};
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
 
-export const getStaticProps: GetStaticProps<DataProps> = async ({ params }) => {
-  const { id } = params!;
+export const getStaticProps: GetStaticProps = async context => {
+  const { id } = context.params as IParams;
 
   const characterData = await fetchCharacter(id);
   const episodesData = await fetchEpisodes(characterData.episode);

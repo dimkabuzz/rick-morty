@@ -289,3 +289,18 @@ h3 {
     }
   }
 }
+
+.footer {
+  background: rgb(242, 242, 242);
+  padding: 30px;
+  margin-top: 50px;
+
+  p {
+    text-align: center;
+    margin: 0;
+  }
+
+  span {
+    color: red;
+  }
+}
